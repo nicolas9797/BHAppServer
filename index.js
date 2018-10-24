@@ -14,6 +14,11 @@ app.use(bodyParser.json())
 //Se usa de manera independiente a la instruccion anterior.
 //Con esto le decimos al sistema que queremos usar json
 
+//Metodo get de ejemplo
+app.get('/metodoTest/:nombre', (req, res) => {
+	res.send({ message: `Test correcto, bienvenido ${req.params.nombre}`})
+})
+
 //Usamos la función que se ejecuta por primera vez al iniciar el servidor.
 //Requiere como primer parametro el puerto y como segundo dicha función.
 app.listen(port, () => {
