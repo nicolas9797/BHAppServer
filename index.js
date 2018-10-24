@@ -6,7 +6,7 @@ const mongoose = require('mongoose') //Pido el módulo mongoose
 
 const app = require('./app')
 
-const port = process.env.PORT || 3000 //Obtengo el puerto por defecto, o uso el 3000
+const config = require('./config')
 
 /*	
 	Le pasamos la dirección donde esta corriendo la base de datos, la siguiente
@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000 //Obtengo el puerto por defecto, o uso el 
 	Como es en localhost no hace falta, pero lo pongo para que se vea completo
 	El nombre firstInstanceMagnetar es el nombre de la base
 */
-mongoose.connect('mongodb://localhost:27017/firstInstanceMagnetar', (err, res) => {
+mongoose.connect(config.db, (err, res) => {
 
 	//if(err) throw err
 
@@ -25,12 +25,12 @@ mongoose.connect('mongodb://localhost:27017/firstInstanceMagnetar', (err, res) =
 
 	//Usamos la función que se ejecuta por primera vez al iniciar el servidor.
 	//Requiere como primer parametro el puerto y como segundo dicha función.
-	app.listen(port, () => {
+	app.listen(config.port, () => {
 
 		//Notese que esto esta dentro de mongoose, porque queremos que asegure primero
 		//la conexion a la base de datos
 
-		console.log(`Corriendo en el puerto: ${port}`)
+		console.log(`Corriendo en el puerto: ${config.port}`)
 
 	})
 
