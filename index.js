@@ -6,6 +6,8 @@ const bodyParser = require('body-parser') //Pido el módulo bodyParser
 //Mongoose nos sirve para usar mongo en node
 const mongoose = require('mongoose') //Pido el módulo mongoose
 
+const Entrada = require('./models/entrada')
+
 const app = express() //Guardo la instancia
 const port = process.env.PORT || 3000 //Obtengo el puerto por defecto, o uso el 3000
 
@@ -31,9 +33,36 @@ app.get('/apiMagnetar/entradas/:idCliente', (req, res) => {
 
 })
 
-app.post('/apiMagnetar/entradas', (req, res) => {
+/*app.post('/apiMagnetar/entradas', (req, res) => {
 	console.log(req.body) //No lo podemos ver normal, requerimos de Postman u otra herramiento
 	res.send(200, {message: `Se recibio correctamente la información de la entrada`})
+})*/
+
+app.post('/apiMagnetar/entradas', (req, res) => {
+	
+	console.log(req.body)
+
+	let entrada = new Entrada()
+	entrada.atencionEspecial = req.body.atencionEspecial
+	entrada.canjeablePorPuntos = req.body.canjeablePorPuntos
+	entrada.codEntrada = req.body.codEntrada
+	entrada.especial = req.body.especial
+	entrada.precio = req.body.precio
+	entrada.reservada = req.body.reservada
+	entrada.soloEnPuerta = req.body.soloEnPuerta
+	entrada.vendida = req.body.vendida
+	entrada.tipo = req.body.tipo
+
+	//dos parametros: error e instancia salvada
+	entrada.save((err, entradaStored) => {
+
+		if (err) res.status(500).send({message:`Error al guardar: ${err}`})
+
+		//Si no ocurre ningun error, entonces se guardó
+		res.status(200).send({entrada: entradaStored})
+
+	})
+
 })
 
 app.delete('/apiMagnetar/cancelarEntrada/:idEntrada', (req, res) => {
