@@ -1,0 +1,1 @@
+Archivos para agilizar el manejo de datos con este cliente en específico. Requiere mantenimiento y automatización.
