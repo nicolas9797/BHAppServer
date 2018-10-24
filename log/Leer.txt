@@ -1,0 +1,1 @@
+Todo lo que logguee node, deberá guardarse en archivos acá, para poder leer si hay algun error y prevenirlo
