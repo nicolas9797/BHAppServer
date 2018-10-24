@@ -25,11 +25,36 @@ app.get('/metodoTest/:nombre', (req, res) => {
 })
 
 app.get('/apiMagnetar/entradas', (req, res) => {
-	res.send(200, {entradas: {}}) //Harcodeado
-	//200 es el estado OK
+
+	Entrada.find({}, (err, entradas) =>{
+
+		if(err) return res.status(500).send({message: `Error en petición: ${err}`})
+
+		if(!entradas) return res.status(404).send({message: `No existen productos`})
+
+		res.send(200, {entradas}) //Harcodeado
+		//200 es el estado OK
+
+	})
+	
 })
 
-app.get('/apiMagnetar/entradas/:idCliente', (req, res) => {
+app.get('/apiMagnetar/entrada/:idEntrada', (req, res) => {
+
+	let entradaId = req.params.entradaId
+
+	//ent es nuestra entrada
+	Entrada.findById(entradaId, (err, ent) =>{
+
+		if(err) return res.status(500).send({message: `No se pudo realizar la petición ${err}`})
+
+		//Si de alguna forma no nos llega la entrada
+		if(!ent) return res.status(404).send({message: `No existe la entrada`})
+
+		//Si en lugar de 'ent' se llamara 'entrada', la clave valor 'entrada: entrada' se podría escribir directamente como 'entrada'
+		res.status(200).send({entrada: ent})
+
+	})
 
 })
 
@@ -94,5 +119,3 @@ mongoose.connect('mongodb://localhost:27017/firstInstanceMagnetar', (err, res) =
 	})
 
 })
-
-
