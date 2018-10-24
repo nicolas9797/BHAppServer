@@ -1,12 +1,23 @@
 'use strict'
 
 const express = require('express') //Pido el módulo express
-const app = express(); //Guardo la instancia
+const bodyParser = require('body-parser') //Pido el módulo bodyParser
+
+const app = express() //Guardo la instancia
+const port = process.env.PORT || 3000 //Obtengo el puerto por defecto, o uso el 3000
+
+app.use(bodyParser.urlencoded({extended: false}))
+//Esto es para evitar objetos anidados, como { person: { name: cw } 
+//Esto se supera al usar json
+
+app.use(bodyParser.json())
+//Se usa de manera independiente a la instruccion anterior.
+//Con esto le decimos al sistema que queremos usar json
 
 //Usamos la función que se ejecuta por primera vez al iniciar el servidor.
 //Requiere como primer parametro el puerto y como segundo dicha función.
-app.listen(3000, () => {
+app.listen(port, () => {
 
-	console.log("Corriendo en el puerto 3000")
+	console.log(`Corriendo en el puerto: ${port}`)
 
 })
