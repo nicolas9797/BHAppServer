@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/nicolas9797/BHAppServer/issues"
   },
-  "homepage": "https://github.com/nicolas9797/BHAppServer#readme"
+  "homepage": "https://github.com/nicolas9797/BHAppServer#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
