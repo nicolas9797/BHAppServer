@@ -6,7 +6,7 @@ const entradaController = require('../controllers/entrada')
 const apiMagnetar = express.Router() //Nuestro manejador de rutas
 
 //El siguiente método es para probar que funciona la seguridad
-apiMagnetar.get('/private', auth, function(req, res) { //Si pusieramos auth.isAuth tiraria error
+apiMagnetar.get('/private', auth, function(req, res) { //Si pusieramos auth.isAuth tiraria error. Hay que revisarlo y testearlo
 	res.status(200).send({message: 'Acceso permitido'})
 })
 
