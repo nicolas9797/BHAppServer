@@ -19,6 +19,25 @@ app.get('/metodoTest/:nombre', (req, res) => {
 	res.send({ message: `Test correcto, bienvenido ${req.params.nombre}`})
 })
 
+app.get('/apiMagnetar/entradas', (req, res) => {
+	res.send(200, {entradas: {}}) //Harcodeado
+	//200 es el estado OK
+})
+
+app.get('/apiMagnetar/entradas/:idCliente', (req, res) => {
+
+})
+
+app.post('/apiMagnetar/entradas', (req, res) => {
+	console.log(req.body) //No lo podemos ver normal, requerimos de Postman u otra herramiento
+	res.send(200, {message: `Se recibio correctamente la información de la entrada`})
+})
+
+app.delete('/apiMagnetar/cancelarEntrada/:idEntrada', (req, res) => {
+
+})
+
+
 //Usamos la función que se ejecuta por primera vez al iniciar el servidor.
 //Requiere como primer parametro el puerto y como segundo dicha función.
 app.listen(port, () => {
