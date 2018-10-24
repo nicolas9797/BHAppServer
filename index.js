@@ -6,7 +6,7 @@ const mongoose = require('mongoose') //Pido el módulo mongoose
 
 const app = require('./app')
 
-const config = require('./config')
+const config = require('./conf/config')
 
 /*	
 	Le pasamos la dirección donde esta corriendo la base de datos, la siguiente
