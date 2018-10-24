@@ -91,6 +91,32 @@ app.post('/apiMagnetar/entradas', (req, res) => {
 })
 
 app.delete('/apiMagnetar/cancelarEntrada/:idEntrada', (req, res) => {
+	let entradaId = req.params.idEntrada
+
+	Entrada.findById(entradaId, (err) => {
+		
+		if(err) return console.log(`Error al conectar: ${err}`)
+
+		entradaId.remove(err => {
+			if(err) return console.log(`Error al remover: ${err}`)
+			res.status(200).send({message: 'Se ha borrado la entrada'})
+		})
+
+	})
+})
+
+app.put('/apiMagnetar/modificarEntrada/:idEntrada', (req, res) =>{
+
+	let entradaId = req.params.idEntrada
+	let update = req.body
+
+	Entrada.findByIdAndUpdate(entradaId, update, (err, entradaUpdated) =>{
+
+		if(err) res.status(500).send({message: `Error al intentar actualizar: ${err}`})
+
+		res.status(200).send(entrada: entradaUpdated)
+
+	})
 
 })
 
