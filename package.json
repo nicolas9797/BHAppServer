@@ -4,6 +4,7 @@
   "description": "La primera app de Magnetar",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,10 @@
   },
   "homepage": "https://github.com/nicolas9797/BHAppServer#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
   }
 }
