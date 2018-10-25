@@ -1,8 +1,6 @@
 'use strict'
 
-const jwt = require('jwt-simple')
-const moment = require('moment')
-const config = require('../conf/config')
+const services = require('../services')
 
 //Nuevamente, el next hace referencia a que siga haciendo otras cosas cuando lo usemos
 function isAuth (req, res, next){
@@ -11,14 +9,15 @@ function isAuth (req, res, next){
 		return res.status(403).send({message: 'No tienes autorizacion'})
 
 	const token = req.headers.authorization.split(' ')[1] //El campo viene con una palabra clave, seguido de un espacio, seguido de un valor
-	const payload = jwt.decode(token, config.SECRET_TOKEN)
-
-	if(payload.exp < moment().unix()){ //Si el momento de expiración fue antes del momento actual
-		return res.status(401).send({message: 'El token ha expirado'})
-	}
-
-	req.user = payload.sub
-	next()
+	
+	services.decodeToken(token)
+		.then(response => {
+			req.user = response
+			next()
+		})
+		.catch(response => {
+			res.status(response.status)
+		})
 
 }
 
